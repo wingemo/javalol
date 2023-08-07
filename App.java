@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Properties;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ public class Main {
     /**
      * The path to the configuration file.
      */
-    public static String CONFIG_FILE = "src/app.config";
+    public static String ENV_FILE = "src/.env";
 
     /**
      * The name property key.
@@ -36,10 +37,20 @@ public class Main {
      *@param args command line arguments passed to this application
      */
     public static void main(String[] args) {
+        readEnv();
         Logger logger = initializeLogger();
         Properties prop = retrieveProperties(logger);
         HashMap<String, User> hashmapUser;
         printProperties(prop, logger);
+    }
+
+    public static void readEnv(){
+        EnvService envService = new EnvService(ENV_FILE);
+        try {
+            envService.readEnv();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -60,7 +71,7 @@ public class Main {
      * @return A Properties object containing application properties
      */
     public static Properties retrieveProperties(Logger logger) {
-        ConfigService configService  = new ConfigService(logger, CONFIG_FILE);
+        ConfigService configService  = new ConfigService(logger, System.getProperty("CONFIG_FILE"));
         return configService.readConfig();
     }
 
@@ -76,4 +87,3 @@ public class Main {
         logger.info(prop.getProperty(PROPERTY_VERSION));
     }
 
-}
