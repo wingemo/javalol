@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author [Philip Wingemo]
  *
  */
-public class Main {
+public class App {
 
     /**
      * The path to the configuration file.
@@ -44,6 +44,11 @@ public class Main {
         printProperties(prop, logger);
     }
 
+    /**
+     * This method reads environment variables from a file using an EnvService object.
+     *
+     * @throws RuntimeException if there is an error reading from the file
+     */
     public static void readEnv(){
         EnvService envService = new EnvService(ENV_FILE);
         try {
@@ -87,3 +92,4 @@ public class Main {
         logger.info(prop.getProperty(PROPERTY_VERSION));
     }
 
+}
