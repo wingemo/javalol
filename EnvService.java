@@ -35,6 +35,7 @@ public class EnvService {
             }
         }
         reader.close();
+        
         if(!Boolean.valueOf(System.getProperty("Development"))){
             boolean success = (new File(this.fileName)).delete();
         }
