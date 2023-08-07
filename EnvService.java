@@ -35,11 +35,12 @@ public class EnvService {
             }
         }
         reader.close();
-        
-        if(!Boolean.valueOf(System.getProperty("Development"))){
+        if(!Boolean.valueOf(System.getProperty("DEVELOPMENT"))){
             boolean success = (new File(this.fileName)).delete();
         }
     }
+
+}
 
 }
 }
