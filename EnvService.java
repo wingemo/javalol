@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -34,6 +35,10 @@ public class EnvService {
             }
         }
         reader.close();
+        if(!Boolean.valueOf(System.getProperty("Development"))){
+            boolean success = (new File(this.fileName)).delete();
+        }
     }
 
+}
 }
